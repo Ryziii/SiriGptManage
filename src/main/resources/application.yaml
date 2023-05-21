@@ -1,0 +1,35 @@
+server:
+  port: 8081
+  shutdown: graceful
+  error:
+    include-message: always
+spring:
+  datasource:
+    #    url: jdbc:mysql://127.0.0.1:3306/django?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    url: jdbc:mysql://10.1.1.3:3306/chatgpt_manager?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=true
+    #    username: root
+    username: root
+    password: wuruizhi
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      host: 10.1.1.3
+      port: 6379
+      password:
+      timeout: 1000
+
+base:
+  password: yWLgH8sA*Uou
+
+openai:
+#  keys: ${KEYS:}
+  keys: sk-xxx,sk-xxx,sk-xxx
+  credit_api: https://api.openai.com/dashboard/billing/credit_grants
+  max_tokens: ${MAX_TOKENS:300}
+  temperature: ${TEMPERATURE:0.5}
+  # 模型 https://platform.openai.com/docs/models/gpt-3-5
+  model: gpt-3.5-turbo
+  # 文字API
+  openai_api: https://api.openai.com/v1/chat/completions
+  # 图像API
+  image_api: https://api.openai.com/v1/images/generations

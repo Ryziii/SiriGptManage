@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds" debug="false">
+    <!--引用默认日志配置-->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>10.1.1.3:50000</destination>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <charset>utf8</charset>
+            <!--Pattern为日志匹配的规则，也是索引的字段名，此处我们不指定，是因为在日志的打印的时候是直接打印的实体，
+            实体与的字段与值是规则的json格式，所以此处不做额外处理-->
+            <Pattern>%msg%n</Pattern>
+        </encoder>
+<!--        <filter class="com.rysiw.chatgptmanage.common.filter.CustomizedLogFilter"/>-->
+    </appender>
+
+    <logger name="ELK_LOGGER" additivity="false" level="INFO">
+        <appender-ref ref="LOGSTASH"/>
+    </logger>
+
+    <!--普通日志输出到控制台-->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>
